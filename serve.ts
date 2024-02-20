@@ -1,5 +1,5 @@
 import { bot, instance } from "./config/index.ts";
-import { serve, webhookCallback, API_CONSTANTS } from "./deps.ts";
+import { API_CONSTANTS, serve, webhookCallback } from "./deps.ts";
 import "https://deno.land/std@0.201.0/dotenv/load.ts";
 
 const handle = webhookCallback(bot, "std/http");
@@ -27,7 +27,7 @@ const webhook = async () => {
       case "/webhook":
         try {
           await bot.api.setWebhook(`https://${url.hostname}/bot`, {
-            allowed_updates: API_CONSTANTS.ALL_UPDATE_TYPES
+            allowed_updates: API_CONSTANTS.ALL_UPDATE_TYPES,
           });
           return new Response("Done. Set");
         } catch (_) {
@@ -41,7 +41,7 @@ const webhook = async () => {
 
 const polling = async () => {
   await bot.start({
-    allowed_updates: API_CONSTANTS.ALL_UPDATE_TYPES
+    allowed_updates: API_CONSTANTS.ALL_UPDATE_TYPES,
   });
 };
 
